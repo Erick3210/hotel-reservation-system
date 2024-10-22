@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Actualizar Reserva</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"],
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #45a049;
+        }
+
+        /* Media queries para pantallas más pequeñas */
+        @media (max-width: 600px) {
+            form {
+                padding: 10px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Actualizar Reserva</h1>
+
+    <form action="/reservas/actualizar" method="post">
+        <input type="hidden" name="id" th:value="${reserva.id}" />
+
+        <label for="fechaInicio">Fecha de Inicio:</label>
+        <input type="text" id="fechaInicio" name="fechaInicio" th:value="${reserva.fechaInicio}" required>
+
+        <label for="fechaFin">Fecha de Fin:</label>
+        <input type="text" id="fechaFin" name="fechaFin" th:value="${reserva.fechaFin}" required>
+
+        <label for="idHabitacion">ID Habitación:</label>
+        <input type="text" id="idHabitacion" name="idHabitacion" th:value="${reserva.idHabitacion}" required>
+
+        <label for="nombreCliente">Nombre Cliente:</label>
+        <input type="text" id="nombreCliente" name="nombreCliente" th:value="${reserva.nombreCliente}" required>
+
+        <label for="estadoReserva">Estado Reserva:</label>
+        <select id="estadoReserva" name="estadoReserva" required>
+            <option value="confirmada" th:selected="${reserva.estadoReserva == 'confirmada'}">Confirmada</option>
+            <option value="pendiente" th:selected="${reserva.estadoReserva == 'pendiente'}">Pendiente</option>
+            <option value="cancelada" th:selected="${reserva.estadoReserva == 'cancelada'}">Cancelada</option>
+        </select>
+
+        <button type="submit">Actualizar Reserva</button>
+    </form>
+
+    <a href="/reservas/lista">Volver a la lista de reservas</a>
+</body>
+</html>
